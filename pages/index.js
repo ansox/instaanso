@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from '../src/components/Button';
+import Button from '../src/components/Button';
 import Footer from '../src/components/Footer';
-import { Box } from '../src/components/foundation/layout/Box';
-import { Grid } from '../src/components/foundation/layout/Grid';
+import Box from '../src/components/foundation/layout/Box';
+import Grid from '../src/components/foundation/layout/Grid';
 import Text from '../src/components/foundation/Text';
 import Menu from '../src/components/Menu';
 
