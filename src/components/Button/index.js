@@ -1,26 +1,20 @@
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 import { TextStyleVariantsMap } from '../foundation/Text';
-import { breakpointsMedia } from '../theme/utils/breakpointMedia';
-import { propToStyle } from '../theme/utils/propToStyle';
+import breakpointsMedia from '../theme/utils/breakpointMedia';
+import propToStyle from '../theme/utils/propToStyle';
 
 const ButtonGhost = css`
   background: transparent;
-  color:  ${props => {
-    return get(props.theme, `colors.${props.variant}.color`);
-  }};
+  color:  ${(props) => get(props.theme, `colors.${props.variant}.color`)};
 `;
 
 const ButtonDefault = css`
-  color:  ${props => {
-    return get(props.theme, `colors.${props.variant}.contrastText`);
-  }};
-  background-color: ${props => {
-    return get(props.theme, `colors.${props.variant}.color`);
-  }};
-`
+  color:  ${(props) => get(props.theme, `colors.${props.variant}.contrastText`)};
+  background-color: ${(props) => get(props.theme, `colors.${props.variant}.color`)};
+`;
 
-export const Button = styled.button`
+const Button = styled.button`
   border: 0;
   cursor: pointer;
   padding: 12px 26px;
@@ -29,21 +23,23 @@ export const Button = styled.button`
   transition: opacity ${({ theme }) => theme.transition};
   border-radius: ${({ theme }) => theme.borderRadius};
 
-  ${({ ghost }) => ghost ? ButtonGhost : ButtonDefault}
+  ${({ ghost }) => (ghost ? ButtonGhost : ButtonDefault)}
   &:hover,
   &:focus {
     opacity: .5;
   };
 
   ${breakpointsMedia({
-  xs: css`
+    xs: css`
       ${TextStyleVariantsMap.smallestException}
     `,
-  md: css`
+    md: css`
       ${TextStyleVariantsMap.paragraph1}
     `,
-})}
+  })}
 
   ${propToStyle('display')}
   ${propToStyle('margin')}
 `;
+
+export default Button;

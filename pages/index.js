@@ -1,26 +1,36 @@
-import { Button } from '../src/components/Button'
-import Footer from '../src/components/Footer'
-import { Grid } from '../src/components/foundation/layout/Grid'
-import Text from '../src/components/foundation/Text'
-import Menu from '../src/components/Menu'
+import React from 'react';
+import { Button } from '../src/components/Button';
+import Footer from '../src/components/Footer';
+import { Box } from '../src/components/foundation/layout/Box';
+import { Grid } from '../src/components/foundation/layout/Grid';
+import Text from '../src/components/foundation/Text';
+import Menu from '../src/components/Menu';
 
 export default function Home() {
   return (
-    <div
-      style={{
-        flex: '1',
-        display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'column',
-        justifyContent: 'space-between'
-      }}>
-      <Menu></Menu>
+    <Box
+      flex="1"
+      display="flex"
+      flexWrap="wrap"
+      flexDirection="column"
+      justifyContent="space-between"
+      backgroundImage="url(/images/bubbles.svg)"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="bottom right"
+    >
+      <Menu />
 
-      <Grid.Container>
+      <Grid.Container
+        marginTop={{ xs: '32px', md: '75px' }}
+      >
         <Grid.Row>
           <Grid.Col
             offset={{ xs: 0, md: 1 }}
             value={{ xs: 12, md: 5 }}
+            display="flex"
+            alignIems="flex-start"
+            justifyContent="center"
+            flexDirection="column"
           >
             <Text
               variant="title"
@@ -72,6 +82,6 @@ export default function Home() {
       </Grid.Container>
 
       <Footer />
-    </div>
-  )
+    </Box>
+  );
 }
