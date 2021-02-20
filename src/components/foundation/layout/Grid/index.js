@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { breakpointsMedia } from '../../../theme/utils/breakpointMedia';
+import breakpointsMedia from '../../../theme/utils/breakpointMedia';
 import propToStyle from '../../../theme/utils/propToStyle';
 
 const Grid = {

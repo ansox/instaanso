@@ -1,4 +1,4 @@
-import { breakpointsMedia } from './breakpointMedia';
+import breakpointsMedia from './breakpointMedia';
 
 export default function propToStyle(propName) {
   return (props) => {
