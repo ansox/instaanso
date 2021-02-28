@@ -7,6 +7,7 @@ import Grid from '../src/components/foundation/layout/Grid';
 import Text from '../src/components/foundation/Text';
 import Menu from '../src/components/Menu';
 import Modal from '../src/components/Modal';
+import FormCadastro from '../src/components/patterns/FormCadastro'
 
 export default function Home() {
   const [isModalOpen, setModalState] = useState(false);
@@ -24,13 +25,8 @@ export default function Home() {
     >
 
       <Modal isOpen={isModalOpen} onClose={() => setModalState(false)}>
-        {(propsModal) => (
-          <Box
-            backgroundColor="white"
-            {...propsModal}
-          >
-            <div>InstaAnso</div>
-          </Box>
+        {(propsDoModal) => (
+          <FormCadastro propsDoModal={propsDoModal}></FormCadastro>
         )}
       </Modal>
 

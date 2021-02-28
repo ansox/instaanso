@@ -1,10 +1,12 @@
-import styled, { css } from 'styled-components';
+import styled, { createGlobalStyle, css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import Grid from '../foundation/layout/Grid';
+import Button from '../Button';
 
 const ModalWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
   align-items: stretch;
   background: rgba(0,0,0,0.1);
   position: fixed;
@@ -32,6 +34,12 @@ const ModalWrapper = styled.div`
   }}
 `;
 
+const LockScroll = createGlobalStyle`
+  body: {
+    overflow: 'hidden';
+  }
+`;
+
 function Modal({ isOpen, onClose, children }) {
   return (
     <ModalWrapper
@@ -44,13 +52,14 @@ function Modal({ isOpen, onClose, children }) {
         }
       }}
     >
+      {isOpen && <LockScroll />}
       <motion.div
         variants={{
           open: {
             x: 0,
           },
           closed: {
-            x: '-100%'
+            x: '100%'
           }
         }}
         animate={isOpen ? 'open' : 'closed'}
@@ -59,11 +68,12 @@ function Modal({ isOpen, onClose, children }) {
         }}
         style={{
           display: 'flex',
-          flex: 1
+          flex: 1,
         }}
       >
         {children({
           'data-modal-safe-area': 'true',
+          'onClose': onClose
         })}
       </motion.div>
     </ModalWrapper>

@@ -30,13 +30,22 @@ const Button = styled.button`
   };
 
   ${breakpointsMedia({
-    xs: css`
+  xs: css`
       ${TextStyleVariantsMap.smallestException}
     `,
-    md: css`
+  md: css`
       ${TextStyleVariantsMap.paragraph1}
     `,
-  })}
+})}
+
+  &:disabled {
+    cursor: not-not-allowed;
+    opacity: .2;
+  }
+
+  ${({ fullWidth }) => fullWidth && css`
+    width: 100%
+  `};
 
   ${propToStyle('display')}
   ${propToStyle('margin')}

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import get from 'lodash/get';
 import propToStyle from '../../theme/utils/propToStyle';
 
 const paragraph1 = css`
@@ -19,13 +20,23 @@ const smallestException = css`
   `}
 `;
 
+const title = css`
+  ${({ theme }) => css`
+    font-size: ${theme.typographyVariants.title.fontSize};
+    font-weight: ${theme.typographyVariants.title.fontWeight};
+    line-height: ${theme.typographyVariants.title.lineHeight};
+ `}
+`;
+
 export const TextStyleVariantsMap = {
   smallestException,
   paragraph1,
+  title
 };
 
 const TextBase = styled.span`
   ${(props) => TextStyleVariantsMap[props.variant]}
+  color: ${(props) => get(props.theme, `colors.${props.color}.color`)};
 
   ${propToStyle('textAlign')}
 `;
@@ -48,9 +59,10 @@ export default function Text({
 Text.propTypes = {
   tag: PropTypes.string.isRequired,
   variant: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 Text.defaultProps = {
   variant: 'paragraph1',
+  children: null
 };
