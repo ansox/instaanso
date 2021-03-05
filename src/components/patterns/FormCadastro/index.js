@@ -1,22 +1,57 @@
 import React from 'react';
+import { Lottie } from '@crello/react-lottie';
 import Grid from '../../foundation/layout/Grid';
 import Box from '../../foundation/layout/Box';
 import Button from '../../Button';
 import TextField from '../../forms/TexField';
 import Text from '../../foundation/Text';
+import successAnimation from './animations/success.json';
+import errorAnimation from './animations/error.json';
+
+const formStates = {
+  DEFAULT: 'DEFAULT',
+  LOADING: 'LOADING',
+  DONE: 'DONE',
+  ERROR: 'ERROR',
+};
 
 function FormContent() {
+  const [isFormSubmited, setIsFormSubmited] = React.useState(false);
+  const [submissionsStatus, setSubmissionsStatus] = React.useState(formStates.DEFAULT);
   const [userInfo, setUserInfo] = React.useState({
     user: '',
-    email: ''
+    name: '',
   });
 
-  const isFormInvalid = userInfo.user.length === 0 || userInfo.email.length === 0;
+  const isFormInvalid = userInfo.user.length === 0 || userInfo.name.length === 0;
 
   return (
     <form onSubmit={(event) => {
       event.preventDefault();
-    }}>
+      setIsFormSubmited(true);
+      fetch('https://instalura-api.verce.app/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: userInfo.user, name: userInfo.name }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+
+          throw new Error('Não foi possível cadastrar');
+        })
+        .then((responseObject) => {
+          setSubmissionsStatus(formStates.DONE);
+          console.log(responseObject);
+        })
+        .catch(() => {
+          setSubmissionsStatus(formStates.ERROR);
+        });
+    }}
+    >
       <Text
         variant="title"
         tag="h1"
@@ -36,14 +71,14 @@ function FormContent() {
 
       <div>
         <TextField
-          placeholder="Email"
-          value={userInfo.email}
-          name="email"
+          placeholder="Name"
+          value={userInfo.name}
+          name="name"
           onChange={(event) => {
             setUserInfo({
               ...userInfo,
-              email: event.target.value
-            })
+              name: event.target.value,
+            });
           }}
         />
       </div>
@@ -55,8 +90,8 @@ function FormContent() {
           onChange={(event) => {
             setUserInfo({
               ...userInfo,
-              user: event.target.value
-            })
+              user: event.target.value,
+            });
           }}
         />
       </div>
@@ -67,10 +102,35 @@ function FormContent() {
           fullWidth
           disabled={isFormInvalid}
         >
-          Cadastrar</Button>
+          Cadastrar
+        </Button>
+
+        {isFormSubmited && submissionsStatus === formStates.DONE && (
+          <Box>
+            <Lottie
+              width="150px"
+              height="150px"
+              className="lottie-container basic"
+              config={{ animationData: successAnimation, loop: false, autoplay: true }}
+            />
+          </Box>
+        )}
+        {isFormSubmited && submissionsStatus === formStates.ERROR && (
+          <Box
+            display="flex"
+            justifyContent="center"
+          >
+            <Lottie
+              width="150px"
+              height="150px"
+              className="lottie-container basic"
+              config={{ animationData: errorAnimation, loop: false, autoplay: true }}
+            />
+          </Box>
+        )}
       </div>
     </form>
-  )
+  );
 }
 
 export default function FormCadastro({ propsDoModal }) {
@@ -109,13 +169,12 @@ export default function FormCadastro({ propsDoModal }) {
           }}
           backgroundColor="white"
           // eslint-disable-next-line react/jsx-props-no-spreading
-
           {...propsDoModal}
         >
           <FormContent />
         </Box>
       </Grid.Col>
-    </Grid.Row >
+    </Grid.Row>
 
   );
 }
