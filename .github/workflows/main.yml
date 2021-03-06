@@ -32,7 +32,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Node version
         run: node -v
-        
+  - name: install
+  - run: yarn install
       - name: Roda o linter
         run: yarn lint
-
