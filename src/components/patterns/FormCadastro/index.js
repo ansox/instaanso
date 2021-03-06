@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { Lottie } from '@crello/react-lottie';
 import Grid from '../../foundation/layout/Grid';
 import Box from '../../foundation/layout/Box';
@@ -43,9 +44,8 @@ function FormContent() {
 
           throw new Error('Não foi possível cadastrar');
         })
-        .then((responseObject) => {
+        .then(() => {
           setSubmissionsStatus(formStates.DONE);
-          console.log(responseObject);
         })
         .catch(() => {
           setSubmissionsStatus(formStates.ERROR);
@@ -178,3 +178,9 @@ export default function FormCadastro({ propsDoModal }) {
 
   );
 }
+
+FormCadastro.propTypes = {
+  propsDoModal: PropTypes.shapes({
+    onClose: PropTypes.func.isRequired,
+  }).isRequired,
+};

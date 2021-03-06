@@ -1,8 +1,7 @@
+import React from 'react';
 import styled, { createGlobalStyle, css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import Grid from '../foundation/layout/Grid';
-import Button from '../Button';
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -59,12 +58,12 @@ function Modal({ isOpen, onClose, children }) {
             x: 0,
           },
           closed: {
-            x: '100%'
-          }
+            x: '100%',
+          },
         }}
         animate={isOpen ? 'open' : 'closed'}
         transition={{
-          duration: .5
+          duration: 0.5,
         }}
         style={{
           display: 'flex',
@@ -73,7 +72,7 @@ function Modal({ isOpen, onClose, children }) {
       >
         {children({
           'data-modal-safe-area': 'true',
-          'onClose': onClose
+          onClose,
         })}
       </motion.div>
     </ModalWrapper>
@@ -84,6 +83,6 @@ Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   children: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-}
+};
 
 export default Modal;
