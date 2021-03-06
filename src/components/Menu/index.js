@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '../Button';
 import Text from '../foundation/Text';
 import Logo from '../theme/Logo';
