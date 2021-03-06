@@ -31,7 +31,7 @@ const title = css`
 export const TextStyleVariantsMap = {
   smallestException,
   paragraph1,
-  title
+  title,
 };
 
 const TextBase = styled.span`
@@ -64,5 +64,5 @@ Text.propTypes = {
 
 Text.defaultProps = {
   variant: 'paragraph1',
-  children: null
+  children: null,
 };
