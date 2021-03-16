@@ -1,8 +1,11 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+import PropTypes from 'prop-types';
 import { TextStyleVariantsMap } from '../foundation/Text';
 import breakpointsMedia from '../theme/utils/breakpointMedia';
 import propToStyle from '../theme/utils/propToStyle';
+import Link from '../Link';
 
 const ButtonGhost = css`
   background: transparent;
@@ -14,7 +17,7 @@ const ButtonDefault = css`
   background-color: ${(props) => get(props.theme, `colors.${props.variant}.color`)};
 `;
 
-const Button = styled.button`
+const ButtonWrapper = styled.button`
   border: 0;
   cursor: pointer;
   padding: 12px 26px;
@@ -50,5 +53,26 @@ const Button = styled.button`
   ${propToStyle('display')}
   ${propToStyle('margin')}
 `;
+
+function Button({ href, children, ...props }) {
+  const hasHref = Boolean(href);
+
+  const tag = hasHref ? Link : 'button';
+
+  return (
+    <ButtonWrapper as={tag} href={href} {...props}>
+      {children}
+    </ButtonWrapper>
+  );
+}
+
+Button.propTypes = {
+  href: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+Button.defaultProps = {
+  href: undefined,
+};
 
 export default Button;
