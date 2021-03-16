@@ -180,7 +180,7 @@ export default function FormCadastro({ propsDoModal }) {
 }
 
 FormCadastro.propTypes = {
-  propsDoModal: PropTypes.shapes({
+  propsDoModal: PropTypes.shape({
     onClose: PropTypes.func.isRequired,
   }).isRequired,
 };
