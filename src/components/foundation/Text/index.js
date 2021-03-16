@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import propToStyle from '../../theme/utils/propToStyle';
+import Link from '../../Link';
 
 const paragraph1 = css`
   ${({ theme }) => css`
@@ -42,8 +43,22 @@ const TextBase = styled.span`
 `;
 
 export default function Text({
-  tag, variant, children, ...props
+  tag, variant, children, href, ...props
 }) {
+  if (href) {
+    return (
+      <TextBase
+        as={Link}
+        href={href}
+        variant={variant}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      >
+        {children}
+      </TextBase>
+    );
+  }
+
   return (
     <TextBase
       as={tag}
@@ -60,9 +75,11 @@ Text.propTypes = {
   tag: PropTypes.string.isRequired,
   variant: PropTypes.string,
   children: PropTypes.node,
+  href: PropTypes.string,
 };
 
 Text.defaultProps = {
   variant: 'paragraph1',
   children: null,
+  href: '',
 };
