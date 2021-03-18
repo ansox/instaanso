@@ -103,6 +103,7 @@ const Grid = {
     ${propToStyle('justifyContent')}
     ${propToStyle('flexDirection')}
     ${propToStyle('paddingRight')}
+    ${propToStyle('order')}
   `,
   Container: styled.div`
     width: 100%;
@@ -141,6 +142,8 @@ const Grid = {
     ${propToStyle('marginLeft')}
     ${propToStyle('marginRight')}
     ${propToStyle('justifyContent')}
+    ${propToStyle('marginBottom')}
+    ${propToStyle('flexDirection')}
 
   `,
 };
