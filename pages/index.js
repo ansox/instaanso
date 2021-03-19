@@ -8,6 +8,7 @@ import Text from '../src/components/foundation/Text';
 import Menu from '../src/components/Menu';
 import Modal from '../src/components/Modal';
 import FormCadastro from '../src/components/patterns/FormCadastro';
+import SEO from '../src/components/SEO';
 
 export default function Home() {
   const [isModalOpen, setModalState] = useState(false);
@@ -23,6 +24,7 @@ export default function Home() {
       backgroundRepeat="no-repeat"
       backgroundPosition="bottom right"
     >
+      <SEO headTitle="Home" />
 
       <Modal isOpen={isModalOpen} onClose={() => setModalState(false)}>
         {(propsDoModal) => (
