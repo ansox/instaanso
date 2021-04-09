@@ -29,6 +29,7 @@ export default function FAQQuestionScreen({ category, question }) {
             variant="title"
             color="tertiary.main"
             marginBottom="25px"
+            tag="h1"
           >
             Artigos
             <br />
@@ -44,7 +45,7 @@ export default function FAQQuestionScreen({ category, question }) {
             {category.questions.map((currentQuestion) => (
               <Text
                 key={currentQuestion.slug}
-                as="li"
+                tag="li"
                 variant="paragraph2"
                 href={`/${currentQuestion.slug}`}
                 color="primary.main"
@@ -66,11 +67,12 @@ export default function FAQQuestionScreen({ category, question }) {
           <Text
             variant="title"
             color="tertiary.main"
+            tag="h1"
           >
             {question.title}
           </Text>
           <Text
-            as="p"
+            tag="p"
             variant="paragraph1"
             color="tertiary.light"
             // eslint-disable-next-line react/no-danger
