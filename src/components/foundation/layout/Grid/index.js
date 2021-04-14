@@ -131,6 +131,9 @@ const Grid = {
   })}
   ${propToStyle('marginTop')}
   ${propToStyle('marginRight')}
+  ${propToStyle('display')}
+  ${propToStyle('flex')}
+  ${propToStyle('alignItems')}
   `,
   Row: styled.div`
     display: flex;
